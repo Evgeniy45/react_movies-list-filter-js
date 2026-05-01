@@ -4,11 +4,11 @@ import { MoviesList } from './components/MoviesList';
 import moviesFromServer from './api/movies.json';
 
 export const App = () => {
-  const [search, setSearch] = useState('');
+  const [query, setQuery] = useState('');
 
-  const normalSearch = search.trim().toLowerCase();
+  const normalSearch = query.trim().toLowerCase();
 
-  const filteredMovies = moviesFromServer.filter(movie => {
+  const visibleMovies = moviesFromServer.filter(movie => {
     const normalTitle = movie.title.trim().toLowerCase();
     const normalDescription = movie.description.trim().toLowerCase();
 
@@ -34,14 +34,14 @@ export const App = () => {
                 id="search-query"
                 className="input"
                 placeholder="Type search word"
-                value={search}
-                onChange={element => setSearch(element.target.value)}
+                value={query}
+                onChange={element => setQuery(element.target.value)}
               />
             </div>
           </div>
         </div>
 
-        <MoviesList key={filteredMovies.imdbId} movies={filteredMovies} />
+        <MoviesList movies={visibleMovies} />
       </div>
 
       <div className="sidebar">Sidebar goes here</div>
